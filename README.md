@@ -1,81 +1,35 @@
-![](images/logo.png)
-# A vertex painting addon for the Godot game engine.
+# Operation Sky
 
-[![](images/Thumbnail.png)](https://youtu.be/g87ov35zvjE)
-  
-  
-![](images/preview.gif)
-  
-# **DOWNLOAD AND INSTALL:**  
-Download the addon from https://github.com/tomankirilov/VPainter.
-Copy the addons folder in your project directory.  
-In **Project/Project Settings/Plugins** set VPainter to Active.
-  
-  
-![](images/activate.gif)
-  
- 
-# **CHANGE LOG:**
-**v0.2**: 
-* Added support for pressure sensitive pen tablets.
-* Some small bug fixes.
- 
- 
-# **USING THE PLUGIN:**  
+Operation Sky is an open-source game made in the Godot engine. In the game, you spawn on a small island in the sky and must harvest points from a mysterious cube. As you progress, you can unlock upgrades that make the cube more efficient and spawn trees. There are also different islands to discover, each with its own unique resources.
 
-![](images/show_hide.gif)  
-In the 3d editor when a MeshInstance node with a valid mesh resource is selected an icon will appear in the top editor menu.  
-When clicked a new sidebar will appear with painting options.
+## Features
 
-# **TOOLS:**  
-![](images/01.gif)   
-**brush tool** : (Shortcut - "1") use to paint vertex colors. You can adjust the size with the sliders or by using "[" and "]"  
-**picker tool**: (Shortcut - "2") use to pick the vertex color under the mouse cursor when clicked.  
-**blur tool**  : (shortcut - "3") in progress  
-**fill tool**  : (shortcut - "4") use to fill the entire mesh with a color. Fill tool is affected by the opacity and blend mode.    
+*   Spawn on a small island in the sky
+*   Harvest points from a mysterious cube
+*   Unlock upgrades to make the cube more efficient and spawn trees
+*   Discover different islands with unique resources
+*   Use gadgets to make your time on the island easier
 
-**color swatches**: There are two color swatches. in the main panel. When clicked they reveal a color picker dialog. The last one clicked is the active one.  
+## Gallery
+![Working Prototype of Horses](https://ninja.dog/LSrCep.png)
 
-**pressure sensitivity**: There is a new option for pressure sensitive pen tablets.
-* **SizePressure** - the size of your brush depends on the pressure input.
-* **OpacityPressure** - the opacity of your brush depends on the pressure input.
+## Installation
 
-**blending modes**: There are currently 5 blending modes supported:  
- * **MIX**: linearly interpolated between the colors.  
- * **ADD**: adds the colors.  
- * **SUBTRACT**: subtracts the colors.  
- * **MULTIPLY**: multiplies the colors.  
- * **DIVIDE**: divides the colors.  
+To play Operation Sky, you will need to have the Godot engine installed on your computer. You can download the engine from the [Godot website](https://godotengine.org/).
 
-**size**: controls the size of the brush and blur tool.  
-**opacity**: controls the opacity of the brush and fill tool.  
-**hardness**: controls the hardness of the brush and blur tool.  
-**spacing** : controls the spacing between the brush "dabs". Lower spacing results in a more precise line.
+Once you have installed the Godot engine, follow these steps to install and run Operation Sky:
 
-**make local copy** : makes a local copy of the mesh. It is useful if you don't want to overwrite your original mesh data.  
+1.  Download the latest release of Operation Sky from the [releases page](https://github.com/your-username/operation-sky/releases).
+2.  Extract the downloaded file to a location on your computer.
+3.  Open the Godot engine and click the "Import" button.
+4.  Navigate to the location where you extracted the Operation Sky files and select the `project.godot` file.
+5.  Click the "Import & Edit" button to open the Operation Sky project in the Godot editor.
+6.  In the Godot editor, click the "Play" button to run the game.
 
-# **LIMITATIONS:**
-* Currently Vpainter does not support godot's primitive meshes. It only works with imported meshes.  
-* Currently only RGB painting is supported. Alpha channel painting is in the works.
-* Currently Vpainter does not support meshes with multiple instances of floating geometry.
+## Contributions
 
-# **ADDITIONAL RESOURCES:**  
-In **VPainter/addons/vpainter/additional_resources/** you will find two shaders:  
-* **shader_vertex_color.shader**:  
-A simple shader that displays the vertex color. It has the possibility to isolate R, G and B channels so you can preview them individually.  
-* **height_blend_4_textures.shader**:  
-A shader used in the first presentation. It is used for mixing 4 textures based on a heightmap and vertex color.     
-The shader uses 3 textures per material:  
-	* **M**: A mask texture.  
-		R channel contains the height information  
-		G channel contains the rougness information  
-		B channel contains the metal information.  
-	* **C**: RGB color/albedo information.  
-	* **N**: Normalmap information.  
-# **SOURCES:**  
-* The height blend shader was made after this amazing post:
-http://untitledgam.es/2017/01/height-blending-shader/
+If you would like to contribute to the development of Operation Sky, you can fork the repository on GitHub and submit a pull request with your changes.
 
-#   O p e r a t i o n - S k y 
- 
- 
+## License
+
+Operation Sky is released under the MIT License. See [LICENSE](LICENSE) for more information.
