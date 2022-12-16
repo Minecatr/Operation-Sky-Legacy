@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://LavaChunk.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Lava.gd" type="Script" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.6, 0.6, 0.6 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+
+[sub_resource type="Animation" id=3]
+resource_name = "Start"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CSGBox:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3.4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CSGBox:material:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3.4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 1, 1, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 1, 0, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[node name="LavaChunk" type="RigidBody"]
+gravity_scale = 2.0
+script = ExtResource( 2 )
+
+[node name="Hitbox" type="Area" parent="."]
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/Start = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+width = 1.0
+height = 1.0
+depth = 1.0
+material = SubResource( 5 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+shape = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

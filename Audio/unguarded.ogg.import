@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/unguarded.ogg-1ac9cd3911a10dfbfcc75b98143c52d4.oggstr"
+
+[deps]
+
+source_file="res://Audio/unguarded.ogg"
+dest_files=[ "res://.import/unguarded.ogg-1ac9cd3911a10dfbfcc75b98143c52d4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

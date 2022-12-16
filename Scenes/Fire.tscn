@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Resources/VXgkg8o.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 0.903534, 0.574219, 1, 1, 0.234375, 0, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.404494, 0.670455 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 30.0
+angular_velocity_random = 1.0
+linear_accel = 4.0
+angle = 360.0
+angle_random = 1.0
+scale = 3.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="QuadMesh" id=7]
+
+[node name="Fire" type="Particles"]
+transform = Transform( -0.5, 7.54979e-08, 0, -7.54979e-08, -0.5, 0, 0, 0, 0.5, 0, -0.5, 1 )
+visible = false
+material_override = SubResource( 9 )
+amount = 16
+process_material = SubResource( 10 )
+draw_pass_1 = SubResource( 7 )
