@@ -20,6 +20,10 @@ var maximumresource = {
 }
 
 func _ready():
+	if get_tree().is_network_server():
+		add_child(load("res://Scenes/network_server.tscn").instance())
+	else:
+		add_child(load("res://Scenes/network_client.tscn").instance())
 	randomize()
 	$Islands/Desert.translation = Vector3(rand_range(-16,16)*4,-0.25,rand_range(-16,16)*4)
 	$Islands/Volcano.translation = Vector3(rand_range(-24,24)*4,-0.5,rand_range(-24,24)*4)

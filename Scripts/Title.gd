@@ -6,12 +6,14 @@ onready var thememenu = $CanvasLayer/Control/VBoxContainer/Theme
 
 func _on_Host_pressed():
 # warning-ignore:return_value_discarded
+	print("Hosted server!")
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_server(11984, 8)
 	get_tree().network_peer = peer
 	get_tree().change_scene("res://Scenes/World.tscn")
 
 func _on_Join_pressed():
+	print("Joined server as client!")
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_client($CanvasLayer/Control/VBoxContainer/Address.text, 11984)
 	get_tree().network_peer = peer

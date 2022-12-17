@@ -489,7 +489,15 @@ func _on_World_text_entered(new_text):
 	print(new_text)
 
 func _on_Quit_pressed():
+<<<<<<< HEAD
 # warning-ignore:return_value_discarded
+=======
+	if get_tree().is_network_server():
+		print("Server closed!")
+	else:
+		print("Client disconnected from server!")
+	get_tree().network_peer = null
+>>>>>>> fde107e36927a0e44bf665b90231daf63246aa9d
 	get_tree().change_scene("res://Scenes/Title.tscn")
 
 
