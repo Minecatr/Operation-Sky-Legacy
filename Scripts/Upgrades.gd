@@ -27,7 +27,7 @@ export var type = {
 	"Rebirth" : "Points",
 }
 export var value = {
-	"Multi" : 0,
+	"Multi" : 1,
 	"Speed" : 0,
 	"PSize" : 0,
 	"Max Tree" : 0,

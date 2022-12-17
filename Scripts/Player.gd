@@ -276,6 +276,7 @@ func _ready():
 	for structure in structures:
 		var tc4 = template4.instance()
 		tc4.name = structure
+		tc4.get_node("Label").text = structure
 		structuresui.add_child(tc4)
 	for recipe in furnaceRecipes.input.keys():
 		var tc6 = template6.instance()
@@ -532,7 +533,8 @@ func _on_World_text_entered(new_text):
 		world = new_text
 	else:
 		$CanvasLayer/UI/Tab/TabContainer/Settings/VBoxContainer/World.text = world
-
+	$CanvasLayer/UI/Tab/TabContainer/Settings/VBoxContainer/World.focus_mode = Control.FOCUS_NONE
+	$CanvasLayer/UI/Tab/TabContainer/Settings/VBoxContainer/World.focus_mode = Control.FOCUS_ALL
 
 func _on_Quit_pressed():
 #<<<<<<< HEAD

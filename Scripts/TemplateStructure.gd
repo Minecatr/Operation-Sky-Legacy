@@ -14,3 +14,5 @@ func _pressed():
 	for child in get_parent().get_children():
 		if child != self:
 			child.pressed = false
+
+
