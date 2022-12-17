@@ -487,8 +487,14 @@ func _on_Save_pressed():
 	print("saving ", world)
 	var file = ConfigFile.new()
 	file.set_value("World", "generated", true)
-	for structure in structuresfolder.get_children():
-		pass
+	file.set_value("World", "structures", structuresfolder.get_child_count())
+	for index in structuresfolder.get_child_count():
+		file.set_value("StructuresID", str(index), structuresfolder.get_child(index).filename)
+		file.set_value("StructuresTranslation", str(index), structuresfolder.get_child(index).translation)
+		file.set_value("StructuresRotation", str(index), structuresfolder.get_child(index).rotation)
+		file.set_value("StructuresHasStorage", str(index), structuresfolder.get_child(index).storage)
+		if structuresfolder.get_child(index).storage:
+			file.set_value("StructuresStorage", str(index), structuresfolder.get_child(index).get_node("Storage").stats)
 	for upgrade in upgrades.cost.keys():
 		file.set_value("UpgradeCost",upgrade,upgrades.cost[upgrade])
 		file.set_value("UpgradeValue",upgrade,upgrades.value[upgrade])
@@ -502,6 +508,16 @@ func _on_Load_pressed():
 	var file = ConfigFile.new()
 	file.load("user://"+world+".oss")
 	if file.get_value("World", "generated", false):
+		for child in structuresfolder.get_children():
+			child.queue_free()
+		for index in file.get_value("World", "structures", 0):
+			var structure = load(file.get_value("StructuresID", str(index))).instance()
+			structure.translation = file.get_value("StructuresTranslation", str(index))
+			structure.rotation = file.get_value("StructuresRotation", str(index))
+			structure.place()
+			structuresfolder.add_child(structure)
+			if file.get_value("StructuresHasStorage", str(index), false):
+				structure.get_node("Storage").stats = file.get_value("StructuresStorage", str(index))
 		for upgrade in upgrades.cost.keys():
 			upgrades.cost[upgrade] = file.get_value("UpgradeCost",upgrade,1)
 			upgrades.value[upgrade] = file.get_value("UpgradeValue",upgrade,0)
