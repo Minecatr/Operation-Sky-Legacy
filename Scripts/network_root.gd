@@ -42,6 +42,10 @@ func _connected_fail():
 
 remote func update_player(id, state):
 	player_info[id].player_instance.do_movement(state.strengthX, state.strengthZ, state.jumpPressed, state.jumpReleased, state._spring_arm_y_rotation, state.delta)
+remote func player_swing(id):
+	player_info[id].player_instance.do_action("swing")
+remote func update_player_position(id, position):
+	player_info[id].player_instance.translation = position
 remote func register_player(info):
 	# Get the id of the RPC sender.
 	var id = get_tree().get_rpc_sender_id()

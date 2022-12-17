@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scripts/The Source.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Builds/Drill.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@ size = 64
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 14 )
+
+[sub_resource type="ImageTexture" id=30]
 
 [sub_resource type="ProceduralSky" id=11]
 ground_bottom_color = Color( 0.403922, 0.513726, 0.576471, 1 )
@@ -327,6 +329,7 @@ rect_min_size = Vector2( 0, 8 )
 margin_top = 99.0
 margin_right = 656.0
 margin_bottom = 141.0
+rect_pivot_offset = Vector2( 362, 21 )
 align = 1
 placeholder_text = "Username"
 
@@ -342,12 +345,27 @@ margin_right = 656.0
 margin_bottom = 233.0
 text = "Join"
 
-[node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 237.0
 margin_right = 656.0
 margin_bottom = 279.0
+split_offset = 425
+
+[node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+margin_right = 509.0
+margin_bottom = 42.0
 align = 1
 placeholder_text = "Address"
+
+[node name="Port" type="SpinBox" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+margin_left = 521.0
+margin_right = 656.0
+margin_bottom = 42.0
+custom_icons/updown = SubResource( 30 )
+min_value = 1000.0
+max_value = 25565.0
+value = 11987.0
+align = 1
 
 [node name="Theme" type="OptionButton" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 283.0

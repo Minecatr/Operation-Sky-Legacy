@@ -8,16 +8,16 @@ func _on_Host_pressed():
 # warning-ignore:return_value_discarded
 	print("Hosted server!")
 	var peer = NetworkedMultiplayerENet.new()
-	peer.create_server(11984, 8)
+	peer.create_server(int($CanvasLayer/Control/VBoxContainer/HSplitContainer/Port.value))
 	get_tree().network_peer = peer
 	get_tree().change_scene("res://Scenes/World.tscn")
 
 func _on_Join_pressed():
 	print("Joined server as client!")
 	var peer = NetworkedMultiplayerENet.new()
-	peer.create_client($CanvasLayer/Control/VBoxContainer/Address.text, 11984)
+	peer.create_client($CanvasLayer/Control/VBoxContainer/HSplitContainer/Address.text, ($CanvasLayer/Control/VBoxContainer/HSplitContainer/Port).value)
 	get_tree().network_peer = peer
-	print($CanvasLayer/Control/VBoxContainer/Address.text)
+	print($CanvasLayer/Control/VBoxContainer/HSplitContainer/Address.text)
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/World.tscn")
 

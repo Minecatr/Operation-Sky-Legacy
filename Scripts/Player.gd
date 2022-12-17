@@ -91,6 +91,15 @@ var structures = [
 	"Laser"
 ]
 
+var previous_position = global_translation
+
+func is_moving():
+	if global_translation != previous_position:
+		return true 
+	else:
+		return false 
+	previous_position = global_translation
+
 func do_action(type):
 	if type == "swing":
 		if equippeditem == "Build" and selectedstructure != "": # make sure everything is ready to place a structure
@@ -284,8 +293,9 @@ func do_movement(strengthX, strengthZ, jumpPressed, jumpReleased, _spring_arm_y_
 		#var look_direction = Vector2(_velocity.z, _velocity.x)
 		#rotation.y = look_direction.angle()
 	_velocity = move_and_slide_with_snap(_velocity, _snap_vector, Vector3.UP, true)
-	
-	rotation_degrees.y = _spring_arm_y_rotation + 180
+	print(_spring_arm_y_rotation)
+	rotation.y = _spring_arm_y_rotation + PI
+	print(rotation.y)
 	#get_input()
 
 func _ready():
