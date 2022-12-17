@@ -15,7 +15,7 @@
 [ext_resource path="res://Assets/Resources/plastic-sand.tres" type="Material" id=13]
 [ext_resource path="res://Assets/Font/FuturaPTCondMediumOblique.otf" type="DynamicFontData" id=14]
 [ext_resource path="res://Assets/Resources/BIG BUTTON.tres" type="Theme" id=15]
-[ext_resource path="res://Scenes/Title.gd" type="Script" id=16]
+[ext_resource path="res://Scripts/Title.gd" type="Script" id=16]
 
 [sub_resource type="DynamicFont" id=29]
 size = 64
