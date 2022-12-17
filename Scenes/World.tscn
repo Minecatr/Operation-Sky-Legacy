@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://grid.tres" type="Material" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/Resources/build-failed.tres" type="Material" id=12]
 [ext_resource path="res://Scripts/Pyramid.gd" type="Script" id=13]
 [ext_resource path="res://Assets/Resources/cloud.tres" type="Material" id=14]
+[ext_resource path="res://Scenes/network_root.tscn" type="PackedScene" id=15]
 
 [sub_resource type="ProceduralSky" id=21]
 ground_bottom_color = Color( 0.403922, 0.513726, 0.576471, 1 )
@@ -480,6 +481,8 @@ one_shot = true
 autostart = true
 
 [node name="Extra Sources" type="Node" parent="."]
+
+[node name="network_root" parent="." instance=ExtResource( 15 )]
 
 [connection signal="area_entered" from="Islands/Desert/ShovelCrystal" to="Islands/Desert/ShovelCrystal" method="_on_Crystal_area_entered"]
 [connection signal="area_entered" from="Islands/Desert/Area" to="Islands/Desert/Area" method="_on_Area_area_entered"]
