@@ -57,6 +57,9 @@ var firesword = false
 var speedsword = false
 var jumpsword = false
 
+var world = "world"
+var save_path = "user://"+world+".oss"
+
 #var spawn = Vector2(0,1.5)
 
 var suffixes = ["", "k", "M", "G", "T", "P", "E", "Z", "Y"]
@@ -481,12 +484,39 @@ func _on_MiddleTabs_tab_changed(tab):
 		$CanvasLayer/UI/Tab/MiddleTabs.current_tab = 0
 
 func _on_Save_pressed():
-	# This is where data would be saved
-	print($CanvasLayer/UI/Tab/TabContainer/Settings/VBoxContainer/World.text)
-
+	print("saving ", world)
+	var file = ConfigFile.new()
+	file.set_value("World", "generated", true)
+	for structure in structuresfolder.get_children():
+		pass
+	for upgrade in upgrades.cost.keys():
+		file.set_value("UpgradeCost",upgrade,upgrades.cost[upgrade])
+		file.set_value("UpgradeValue",upgrade,upgrades.value[upgrade])
+	for child in $"../Islands".get_children():
+		file.set_value("Islands", child.name, child.translation)
+	file.set_value("PlayerStats", name, stats)
+	file.set_value("PlayerExists", name, true)
+	file.save("user://"+world+".oss")
+func _on_Load_pressed():
+	print ("loading ", world)
+	var file = ConfigFile.new()
+	file.load("user://"+world+".oss")
+	if file.get_value("World", "generated", false):
+		for upgrade in upgrades.cost.keys():
+			upgrades.cost[upgrade] = file.get_value("UpgradeCost",upgrade,1)
+			upgrades.value[upgrade] = file.get_value("UpgradeValue",upgrade,0)
+		for child in $"../Islands".get_children():
+			child.translation = file.get_value("Islands", child.name, Vector3(0,0,0))
+		if file.get_value("PlayerExists", name, false):
+			stats = file.get_value("PlayerStats", name, load("res://Scenes/Stats.tscn").instance().stats)
+			updstats()
 func _on_World_text_entered(new_text):
-	# This is where data would be loaded
-	print(new_text)
+	# This is world would be named
+	if new_text.is_valid_filename():
+		world = new_text
+	else:
+		$CanvasLayer/UI/Tab/TabContainer/Settings/VBoxContainer/World.text = world
+
 
 func _on_Quit_pressed():
 #<<<<<<< HEAD
