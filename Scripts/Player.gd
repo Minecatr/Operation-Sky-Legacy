@@ -14,6 +14,7 @@ onready var _model: Spatial = $Character
 
 ####################################################
 
+const SAVE_PATH = "user://save_config_file.ini"
 
 signal health_updated(health)
 signal killed()
@@ -41,6 +42,7 @@ onready var stats = $Stats.stats
 onready var statcolors = $Stats.colors
 # onready var health = $Stats.health
 onready var healthbar = $CanvasLayer/UI/Quickbar/HBoxContainer/Health
+onready var nametag = $Nametag
 
 onready var animplayer = $CanvasLayer/UI/AnimationPlayer
 onready var bgm = $CanvasLayer/UI/AudioStreamPlayer
@@ -247,6 +249,10 @@ func _physics_process(delta: float) -> void:
 	get_input()
 
 func _ready():
+	var config = ConfigFile.new() # goes in client controller
+	config.load(SAVE_PATH) # goes in client controller
+	name = config.get_value("User","name", "Player") # goes in client controller
+	nametag.text = name # goes in client controller
 	stats.merge(load("res://Scenes/Stats.tscn").instance().stats, false)
 	$CanvasLayer/UI/Tab.rect_size = OS.window_size
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear2db(0.25))
