@@ -14,7 +14,7 @@
 [ext_resource path="res://Assets/Resources/plastic-brown.tres" type="Material" id=12]
 [ext_resource path="res://Assets/Resources/plastic-sand.tres" type="Material" id=13]
 [ext_resource path="res://Assets/Font/FuturaPTCondMediumOblique.otf" type="DynamicFontData" id=14]
-[ext_resource path="res://Assets/Resources/BIG BUTTON.tres" type="Theme" id=15]
+[ext_resource path="res://Assets/Resources/Swift.tres" type="Theme" id=15]
 [ext_resource path="res://Scripts/Title.gd" type="Script" id=16]
 
 [sub_resource type="DynamicFont" id=29]
@@ -298,6 +298,7 @@ script = ExtResource( 16 )
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 15 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 anchor_left = 0.5
@@ -316,33 +317,42 @@ custom_fonts/font = SubResource( 29 )
 text = "Operation: Sky"
 align = 1
 
-[node name="Host" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 87.0
 margin_right = 656.0
-margin_bottom = 135.0
-theme = ExtResource( 15 )
+margin_bottom = 95.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="Host" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+margin_top = 99.0
+margin_right = 656.0
+margin_bottom = 141.0
 text = "Host"
 
 [node name="Join" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-margin_top = 139.0
+margin_top = 145.0
 margin_right = 656.0
 margin_bottom = 187.0
-theme = ExtResource( 15 )
 text = "Join"
 
 [node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 191.0
 margin_right = 656.0
-margin_bottom = 243.0
-theme = ExtResource( 15 )
+margin_bottom = 233.0
 align = 1
 placeholder_text = "Address"
 
-[node name="Quit" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-margin_top = 247.0
+[node name="Theme" type="OptionButton" parent="CanvasLayer/Control/VBoxContainer"]
+margin_top = 237.0
 margin_right = 656.0
-margin_bottom = 295.0
-theme = ExtResource( 15 )
+margin_bottom = 279.0
+text = "Theme"
+align = 1
+
+[node name="Quit" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+margin_top = 283.0
+margin_right = 656.0
+margin_bottom = 325.0
 text = "Quit"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -526,6 +536,7 @@ autostart = true
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Host" to="." method="_on_Host_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Join" to="." method="_on_Join_pressed"]
+[connection signal="item_selected" from="CanvasLayer/Control/VBoxContainer/Theme" to="." method="_on_Theme_item_selected"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="timeout" from="The Source/Timer" to="The Source" method="_on_Timer_timeout"]
 [connection signal="animation_finished" from="Spinner/AnimationPlayer" to="Spinner" method="_on_AnimationPlayer_animation_finished"]
