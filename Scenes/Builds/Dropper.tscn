@@ -64,7 +64,7 @@ radial_segments = 6
 material = ExtResource( 6 )
 
 [node name="Peg" type="CSGBox" parent="."]
-transform = Transform( -1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 3.38763e-08, -0.5, 1.4 )
+transform = Transform( -1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, -0.5, 1.375 )
 width = 0.25
 height = 0.5
 depth = 0.25

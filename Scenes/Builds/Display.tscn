@@ -74,16 +74,7 @@ disabled = true
 [node name="Stats" parent="." instance=ExtResource( 2 )]
 health = 1
 stats = {
-"Cactus": 0,
-"Coal": 0,
-"Dirt": 0,
-"Food": 0,
-"Glass": 0,
-"Gold": 0,
-"Points": 0,
-"Sand": 0,
-"Stone": 10,
-"Wood": 0
+"Stone": 10
 }
 
 [node name="HealthBar3D" parent="." instance=ExtResource( 3 )]
@@ -101,13 +92,15 @@ transparent_bg = true
 disable_3d = true
 render_target_v_flip = true
 
-[node name="VBoxContainer" type="GridContainer" parent="Viewport"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="ScrollContainer" type="ScrollContainer" parent="Viewport"]
+margin_right = 196.0
+margin_bottom = 196.0
+
+[node name="VBoxContainer" type="GridContainer" parent="Viewport/ScrollContainer"]
 columns = 2
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( -1.09278e-08, -0.25, -4.37114e-08, 0, -1.09278e-08, 1, -0.25, 1.09278e-08, 1.91069e-15, 0, -0.16, 0.625 )
+transform = Transform( -0.25, -7.94668e-09, -1.38943e-15, 0, -1.09278e-08, 1, -7.94668e-09, 0.25, 4.37114e-08, 0, -0.16, 0.625 )
 texture = SubResource( 3 )
 
 [node name="Timer" type="AnimationPlayer" parent="."]

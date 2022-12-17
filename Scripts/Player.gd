@@ -35,12 +35,12 @@ onready var statsui = $CanvasLayer/UI/Tab/TabContainer/Stats/VBoxContainer
 onready var upgradesui = $CanvasLayer/UI/Tab/TabContainer/Upgrades/VBoxContainer
 onready var furnaceui = $CanvasLayer/UI/Tab/MiddleTabs/Furnace
 onready var structuresui = $CanvasLayer/UI/Tab/SideTabs/Build/GridContainer
-onready var quickbar = $CanvasLayer/UI/HBoxContainer
+onready var quickbar = $CanvasLayer/UI/Quickbar/HBoxContainer
 onready var settings = $CanvasLayer/UI/Tab/TabContainer/Settings/VBoxContainer
 onready var stats = $Stats.stats
 onready var statcolors = $Stats.colors
 # onready var health = $Stats.health
-onready var healthbar = $CanvasLayer/UI/HBoxContainer/Health
+onready var healthbar = $CanvasLayer/UI/Quickbar/HBoxContainer/Health
 
 onready var animplayer = $CanvasLayer/UI/AnimationPlayer
 onready var bgm = $CanvasLayer/UI/AudioStreamPlayer
@@ -91,13 +91,13 @@ func _unhandled_input(_event):
 		if equippeditem == "Build" and selectedstructure != "": # make sure everything is ready to place a structure
 				var structure = load("res://Scenes/Builds/"+selectedstructure+".tscn").instance()
 				var canplace = true
-				for stat in stats.keys(): # see if player has enough resources
+				for stat in structure.get_node("Stats").stats.keys(): # see if player has enough resources
 					if stats[stat] < structure.get_node("Stats").stats[stat] or translation.y > 50:
 						canplace = false
 						$BuildOutline.material_override = load("res://Assets/Resources/build-failed.tres")
 						$Failtimer.start()
 				if canplace == true: # if it does place it
-					for stat in stats.keys():
+					for stat in structure.get_node("Stats").stats.keys():
 						stats[stat] -= structure.get_node("Stats").stats[stat]
 					updstats()
 					structure.translation = translation
@@ -135,8 +135,7 @@ func get_input():
 	if Input.is_action_pressed("kill"): # Self harm testing only
 		damage(5)
 	if Input.is_action_pressed("cheat"): # cheating testing only
-		stats["Points"] += 100000
-		#stats["Wood"] += 1
+		stats["Points"] += 234534
 		activatefiresword()
 		activateshovelsword()
 		activatespeedsword()
@@ -144,7 +143,7 @@ func get_input():
 		
 		var item = load("res://Scenes/Item.tscn").instance()
 		var itemstats = item.get_node("Stats").stats
-		itemstats[itemstats.keys()[randi() % itemstats.keys().size()]] = 100
+		itemstats[load("res://Scenes/Stats.tscn").instance().stats.keys()[randi() % load("res://Scenes/Stats.tscn").instance().stats.keys().size()]] = 100
 		item.translation = translation + Vector3(0,0,1.5).rotated(Vector3.UP, rotation.y)
 		get_parent().add_child(item)
 		updstats()
@@ -245,6 +244,7 @@ func _physics_process(delta: float) -> void:
 	get_input()
 
 func _ready():
+	stats.merge(load("res://Scenes/Stats.tscn").instance().stats, false)
 	$CanvasLayer/UI/Tab.rect_size = OS.window_size
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear2db(0.25))
 	# stat making
@@ -254,6 +254,7 @@ func _ready():
 		tc.self_modulate = statcolors[stat]
 		statsui.add_child(tc)
 		var tc2 = template2.instance()
+		tc2.visible = false
 		tc2.name = stat
 		tc2.self_modulate = statcolors[stat]
 		quickbar.add_child(tc2)
@@ -288,6 +289,7 @@ func updstats():
 	for container in quickbar.get_children():
 		if container.name != "Health":
 			var amount = stats[container.name]
+			container.visible = amount > 0
 # warning-ignore:integer_division
 			var exponent = str(round(amount/10)).length()/3
 			if exponent > 0:
@@ -477,3 +479,16 @@ func _on_MiddleTabs_tab_changed(tab):
 	if tab == 1:
 		$CanvasLayer/UI/Tab/MiddleTabs.visible = false
 		$CanvasLayer/UI/Tab/MiddleTabs.current_tab = 0
+
+func _on_Save_pressed():
+	# This is where data would be saved
+	print($CanvasLayer/UI/Tab/TabContainer/Settings/VBoxContainer/World.text)
+
+func _on_World_text_entered(new_text):
+	# This is where data would be loaded
+	print(new_text)
+
+func _on_Quit_pressed():
+	get_tree().change_scene("res://Scenes/Title.tscn")
+
+

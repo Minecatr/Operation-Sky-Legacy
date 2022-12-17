@@ -4,16 +4,17 @@ export var health : int
 # Stats
 export var stats = {
 	"Points" : -1,
-	"Food" : -1,
-	"Wood" : -1,
-	"Stone" : -1,
-	"Gold" : -1,
-	"Cactus" : -1,
-	"Sand" : -1,
-	"Dirt" : -1,
-	"Glass" : -1,
-	"Coal" : -1,
+	"Food" : 0,
+	"Wood" : 0,
+	"Stone" : 0,
+	"Gold" : 0,
+	"Cactus" : 0,
+	"Sand" : 0,
+	"Dirt" : 0,
+	"Glass" : 0,
+	"Coal" : 0,
 }
+
 export var colors = {
 	"Points" : Color(1,1,1),
 	"Food" : Color(1,0.13,0.5),

@@ -1,7 +1,7 @@
 extends CSGBox
 
 onready var colors = load("res://Scenes/Stats.tscn").instance().colors
-onready var statsui = $"../Viewport/VBoxContainer"
+onready var statsui = $"../Viewport/ScrollContainer/VBoxContainer"
 
 var template = preload("res://Scenes/TemplateStat3.tscn")
 

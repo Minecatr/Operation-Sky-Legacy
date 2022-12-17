@@ -5,6 +5,7 @@ onready var stats = $Stats.stats
 var upgrades = load("res://Assets/Resources/Upgrades.tres")
 
 func _ready():
+	stats.merge(load("res://Scenes/Stats.tscn").instance().stats, false)
 	var material = SpatialMaterial.new()
 	var color = Color(0,0,0)
 	var divider = 0
