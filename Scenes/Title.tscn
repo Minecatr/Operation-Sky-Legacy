@@ -323,36 +323,43 @@ margin_right = 656.0
 margin_bottom = 95.0
 rect_min_size = Vector2( 0, 8 )
 
-[node name="Host" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Username" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 99.0
 margin_right = 656.0
 margin_bottom = 141.0
-text = "Host"
+align = 1
+placeholder_text = "Username"
 
-[node name="Join" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Host" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 145.0
 margin_right = 656.0
 margin_bottom = 187.0
-text = "Join"
+text = "Host"
 
-[node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Join" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 191.0
 margin_right = 656.0
 margin_bottom = 233.0
+text = "Join"
+
+[node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer"]
+margin_top = 237.0
+margin_right = 656.0
+margin_bottom = 279.0
 align = 1
 placeholder_text = "Address"
 
 [node name="Theme" type="OptionButton" parent="CanvasLayer/Control/VBoxContainer"]
-margin_top = 237.0
+margin_top = 283.0
 margin_right = 656.0
-margin_bottom = 279.0
+margin_bottom = 325.0
 text = "Theme"
 align = 1
 
 [node name="Quit" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-margin_top = 283.0
+margin_top = 329.0
 margin_right = 656.0
-margin_bottom = 325.0
+margin_bottom = 371.0
 text = "Quit"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
