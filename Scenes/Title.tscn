@@ -541,6 +541,7 @@ one_shot = true
 [node name="Timer" type="Timer" parent="Volcano"]
 autostart = true
 
+[connection signal="text_entered" from="CanvasLayer/Control/VBoxContainer/Username" to="." method="_on_Username_text_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Host" to="." method="_on_Host_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Join" to="." method="_on_Join_pressed"]
 [connection signal="item_selected" from="CanvasLayer/Control/VBoxContainer/Theme" to="." method="_on_Theme_item_selected"]

@@ -489,6 +489,7 @@ func _on_World_text_entered(new_text):
 	print(new_text)
 
 func _on_Quit_pressed():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Title.tscn")
 
 
