@@ -341,9 +341,9 @@ func _on_Hit_area_entered(area):
 			else:
 				area.take_damage(1,self)
 	if area.is_in_group("hitbox"):
-		if area.get_parent().health > 0:
+		if area.get_parent().health > 0 and area.get_parent() != self:
 			if equippeditem == "Sword":
-				area.get_parent().damage(1+upgrades.value["Damage Multi"],self)
+				area.get_parent().damage(1+upgrades.value["Damage Multi"])
 				if firesword and !area.get_parent().onfire:
 					var onfireclone = load("res://Scenes/OnFire.tscn").instance()
 					onfireclone.player = self
@@ -376,7 +376,8 @@ func _on_Arms_Color_color_changed(color):
 	$Character/RootNode/Beta_Joints.get("material/0").albedo_color = color
 
 # Health System
-
+func takedamage(amount, source):
+	damage(amount)
 func damage(amount):
 	if invulnerability_timer.is_stopped():
 		invulnerability_timer.start()
