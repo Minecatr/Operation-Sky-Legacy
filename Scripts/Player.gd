@@ -43,7 +43,7 @@ onready var statcolors = $Stats.colors
 onready var healthbar = $CanvasLayer/UI/Quickbar/HBoxContainer/Health
 
 onready var animplayer = $CanvasLayer/UI/AnimationPlayer
-onready var bgm = $CanvasLayer/UI/AudioStreamPlayer
+# onready var bgm = $CanvasLayer/UI/AudioStreamPlayer
 
 onready var nametag = $Nametag
 
@@ -94,15 +94,15 @@ var structures = [
 	"Laser"
 ]
 
-var previous_position = global_translation
+var previous_position = translation
 
 func is_moving():
-	if global_translation != previous_position:
+	if translation != previous_position:
 		return true 
 	else:
 		return false 
 # warning-ignore:unreachable_code
-	previous_position = global_translation
+	previous_position = translation
 
 func do_action(type):
 	if type == "swing":
@@ -376,7 +376,7 @@ func _on_Arms_Color_color_changed(color):
 	$Character/RootNode/Beta_Joints.get("material/0").albedo_color = color
 
 # Health System
-func takedamage(amount, source):
+func takedamage(amount, _source):
 	damage(amount)
 func damage(amount):
 	if invulnerability_timer.is_stopped():

@@ -332,25 +332,25 @@ margin_bottom = 141.0
 align = 1
 placeholder_text = "Username"
 
-[node name="HSplitContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="ServerMenu" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 145.0
 margin_right = 656.0
 margin_bottom = 187.0
 
-[node name="Host" type="Button" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+[node name="Host" type="Button" parent="CanvasLayer/Control/VBoxContainer/ServerMenu"]
 margin_right = 161.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 text = "Host"
 
-[node name="Join" type="Button" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+[node name="Join" type="Button" parent="CanvasLayer/Control/VBoxContainer/ServerMenu"]
 margin_left = 165.0
 margin_right = 326.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 text = "Join"
 
-[node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+[node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer/ServerMenu"]
 margin_left = 330.0
 margin_right = 491.0
 margin_bottom = 42.0
@@ -358,7 +358,7 @@ size_flags_horizontal = 3
 align = 1
 placeholder_text = "Address"
 
-[node name="Port" type="SpinBox" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+[node name="Port" type="SpinBox" parent="CanvasLayer/Control/VBoxContainer/ServerMenu"]
 margin_left = 495.0
 margin_right = 656.0
 margin_bottom = 42.0
@@ -372,6 +372,7 @@ align = 1
 margin_top = 191.0
 margin_right = 656.0
 margin_bottom = 233.0
+size_flags_horizontal = 3
 text = "Theme"
 align = 1
 
@@ -561,8 +562,8 @@ one_shot = true
 autostart = true
 
 [connection signal="text_entered" from="CanvasLayer/Control/VBoxContainer/Username" to="." method="_on_Username_text_entered"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HSplitContainer/Host" to="." method="_on_Host_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HSplitContainer/Join" to="." method="_on_Join_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/ServerMenu/Host" to="." method="_on_Host_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/ServerMenu/Join" to="." method="_on_Join_pressed"]
 [connection signal="item_selected" from="CanvasLayer/Control/VBoxContainer/Theme" to="." method="_on_Theme_item_selected"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="timeout" from="The Source/Timer" to="The Source" method="_on_Timer_timeout"]
