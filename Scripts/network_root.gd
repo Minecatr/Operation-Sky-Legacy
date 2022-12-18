@@ -4,7 +4,7 @@ extends Node
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var move_islands = false
 var my_info
 var config
 const config_path = "user://save_config_file.ini"
@@ -25,7 +25,6 @@ func _ready():
 # warning-ignore:return_value_discarded
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 	print("Loaded network_root Scene, doing all shit")
-	pass # Replace with function body.
 
 var player_info = {}
 # Info we send to other players
@@ -46,6 +45,21 @@ func _server_disconnected():
 func _connected_fail():
 	pass # Could not even connect to server; abort.
 
+remote func damage_player(id, amount):
+	player_info[id].player_instance.damage(amount)
+
+remote func set_island_position(island, position):
+	var islands = my_info.player_instance.get_parent().get_node("Islands").get_children()
+	for value in islands:
+		if value.name == island:
+			value.translation = position
+	#print(player_info)
+	#var islands_array = my_info.player_instance.get_parent().get_node("Islands").get_children()
+	#var positions = {}
+	#for island in islands_array:
+	#	positions[island.name] = island.translation
+	#return positions
+
 remote func update_player(id, state):
 	player_info[id].player_instance.do_movement(state.strengthX, state.strengthZ, state.jumpPressed, state.jumpReleased, state._spring_arm_y_rotation, state.delta)
 remote func player_swing(id):
@@ -65,3 +79,10 @@ remote func register_player(info):
 	player_info[id].player_instance.get_node("Nametag").text = player_info[id].name
 
 	# Call function to update lobby UI here
+
+
+func _on_Timer_timeout():
+	if my_info.player_instance.get_tree().is_network_server():
+		var islands = my_info.player_instance.get_parent().get_node("Islands").get_children()
+		for island in islands:
+			rpc("set_island_position", island.name, island.translation)

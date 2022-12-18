@@ -5,11 +5,12 @@ extends Node
 # var a = 2
 # var b = "text"
 
+onready var islands = get_parent().get_node("Islands").get_children()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	var new_positions = rpc("get_island_positions")
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
