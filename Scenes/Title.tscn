@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scripts/The Source.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Builds/Drill.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@ size = 64
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 14 )
+
+[sub_resource type="ImageTexture" id=30]
 
 [sub_resource type="ProceduralSky" id=11]
 ground_bottom_color = Color( 0.403922, 0.513726, 0.576471, 1 )
@@ -336,30 +338,46 @@ margin_right = 656.0
 margin_bottom = 187.0
 text = "Host"
 
-[node name="Join" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="HSplitContainer" type="HFlowContainer" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 191.0
 margin_right = 656.0
 margin_bottom = 233.0
+
+[node name="Join" type="Button" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+margin_right = 181.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
 text = "Join"
 
-[node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer"]
-margin_top = 237.0
-margin_right = 656.0
-margin_bottom = 279.0
+[node name="Address" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+margin_left = 185.0
+margin_right = 418.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
 align = 1
 placeholder_text = "Address"
 
+[node name="Port" type="SpinBox" parent="CanvasLayer/Control/VBoxContainer/HSplitContainer"]
+margin_left = 422.0
+margin_right = 655.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+custom_icons/updown = SubResource( 30 )
+max_value = 99999.0
+value = 11987.0
+align = 1
+
 [node name="Theme" type="OptionButton" parent="CanvasLayer/Control/VBoxContainer"]
-margin_top = 283.0
+margin_top = 237.0
 margin_right = 656.0
-margin_bottom = 325.0
+margin_bottom = 279.0
 text = "Theme"
 align = 1
 
 [node name="Quit" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-margin_top = 329.0
+margin_top = 283.0
 margin_right = 656.0
-margin_bottom = 371.0
+margin_bottom = 325.0
 text = "Quit"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -543,7 +561,7 @@ autostart = true
 
 [connection signal="text_entered" from="CanvasLayer/Control/VBoxContainer/Username" to="." method="_on_Username_text_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Host" to="." method="_on_Host_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Join" to="." method="_on_Join_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HSplitContainer/Join" to="." method="_on_Join_pressed"]
 [connection signal="item_selected" from="CanvasLayer/Control/VBoxContainer/Theme" to="." method="_on_Theme_item_selected"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="timeout" from="The Source/Timer" to="The Source" method="_on_Timer_timeout"]

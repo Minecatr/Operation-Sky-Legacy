@@ -7,7 +7,6 @@ onready var sprite = $"Islands/Main Island"
 var upgrades = load("res://Assets/Resources/Upgrades.tres")
 var original = load("res://Assets/Resources/UpgradeValue.tres")
 var rebirths = 0
-var extrasources = 0
 var maximumresource = {
 	"Tree": upgrades.value["Max Tree"],
 	"Rock": upgrades.value["Max Rock"],
@@ -47,13 +46,6 @@ func _on_ResourceTimer_timeout():
 	timer.start()
 
 func _process(_delta):
-	if upgrades.value["Extra Source"] != extrasources:
-		var extrasource = load("res://Scenes/Source Island.tscn").instance()
-		var dm = upgrades.value["Extra Source"] * 10
-		extrasource.get_node("CSGBox").material = extrasource.get_node("CSGBox").material.duplicate()
-		extrasource.translation = Vector3(rand_range(-dm,dm),clamp(rand_range(-dm,dm), -50, 100),rand_range(-dm,dm))
-		$"Extra Sources".add_child(extrasource)
-		extrasources += 1
 	if upgrades.value["Rebirth"] != rebirths:
 		for resource in $"Islands/Main Island".get_node("Resources").get_children():
 			for node in resource.get_children():

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Font/FuturaPTCondBookOblique.otf" type="DynamicFontData" id=1]
 
@@ -25,6 +25,8 @@ skew = Vector2( 0.5, 0 )
 bg_color = Color( 0.2475, 0.33825, 0.55, 1 )
 skew = Vector2( 0.5, 0 )
 
+[sub_resource type="ImageTexture" id=9]
+
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 1 )
@@ -39,3 +41,4 @@ Button/styles/pressed = SubResource( 8 )
 LineEdit/styles/focus = SubResource( 3 )
 LineEdit/styles/normal = SubResource( 8 )
 LineEdit/styles/read_only = SubResource( 2 )
+SpinBox/icons/updown = SubResource( 9 )

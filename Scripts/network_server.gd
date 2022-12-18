@@ -8,7 +8,6 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Loaded network_server Scene, doing server shit")
 	pass # Replace with function body.
 
 

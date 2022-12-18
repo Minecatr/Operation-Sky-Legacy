@@ -9,12 +9,11 @@ var _snap_vector := Vector3.DOWN
 var jumping := false
 var cachepos := translation
 
-onready var _spring_arm: SpringArm = $SpringArm
+#onready var _spring_arm: SpringArm = $SpringArm
+onready var network_id = get_tree().get_network_unique_id()
 onready var _model: Spatial = $Character
 
 ####################################################
-
-const SAVE_PATH = "user://save_config_file.ini"
 
 signal health_updated(health)
 signal killed()
@@ -42,10 +41,11 @@ onready var stats = $Stats.stats
 onready var statcolors = $Stats.colors
 # onready var health = $Stats.health
 onready var healthbar = $CanvasLayer/UI/Quickbar/HBoxContainer/Health
-onready var nametag = $Nametag
 
 onready var animplayer = $CanvasLayer/UI/AnimationPlayer
 onready var bgm = $CanvasLayer/UI/AudioStreamPlayer
+
+onready var nametag = $Nametag
 
 var velocity = Vector2.ZERO
 var actiondown = false
@@ -91,8 +91,18 @@ var structures = [
 	"Furnace",
 	"Laser"
 ]
-func _unhandled_input(_event):
-	if Input.is_action_just_pressed("swing"):
+
+var previous_position = global_translation
+
+func is_moving():
+	if global_translation != previous_position:
+		return true 
+	else:
+		return false 
+	previous_position = global_translation
+
+func do_action(type):
+	if type == "swing":
 		if equippeditem == "Build" and selectedstructure != "": # make sure everything is ready to place a structure
 				var structure = load("res://Scenes/Builds/"+selectedstructure+".tscn").instance()
 				var canplace = true
@@ -127,19 +137,17 @@ func _unhandled_input(_event):
 			else:
 				animation_player.play("punch_left")
 			animalternate = !animalternate
-	if Input.is_action_just_released("swing"):
-		pass
-func get_input():
-	if Input.is_action_just_pressed("ui_cancel"):
+func use_input(type, just_pressed):
+	if type == "ui_cancel" and just_pressed:
 		$CanvasLayer/UI/Tab/MiddleTabs.visible = false
-	if Input.is_action_just_pressed("rotate"):
+	if type == "rotate" and just_pressed:
 		$BuildOutline.rotation_degrees.x += 90
 	for n in range(1,9): # Hotbar
-		if Input.is_action_just_pressed(str(n)) and n <= $CanvasLayer/UI/HBoxContainer2.get_child_count():
+		if type == str(n) and just_pressed and n <= $CanvasLayer/UI/HBoxContainer2.get_child_count():
 			$CanvasLayer/UI/HBoxContainer2.get_child(n-1).press()
-	if Input.is_action_pressed("kill"): # Self harm testing only
+	if type == "kill": # Self harm testing only
 		damage(5)
-	if Input.is_action_pressed("cheat"): # cheating testing only
+	if type == "cheat": # cheating testing only
 		stats["Points"] += 234534
 		activatefiresword()
 		activateshovelsword()
@@ -185,23 +193,23 @@ func animate(type,player): # all animations
 	anim = ""
 
 func _process(_delta: float) -> void:
-	_spring_arm.translation = translation + Vector3(0,1,0) # first person and camera
-	if _spring_arm.spring_length == 0:
-		_model.visible = false
-	else:
-		_model.visible = true
-	if upgrades.value["Rebirth"] != rebirths: # rebirth check
+	#_spring_arm.translation = translation + Vector3(0,1,0) # first person and camera
+	#if _spring_arm.spring_length == 0:
+	#	_model.visible = false
+	#else:
+	#	_model.visible = true
+	#if upgrades.value["Rebirth"] != rebirths: # rebirth check
 		#for stat in stats:
 			#stats[stat] = 0
-		pass
+		#pass
 	updupgrades()
 
-func _physics_process(delta: float) -> void:
+func do_movement(strengthX, strengthZ, jumpPressed, jumpReleased, _spring_arm_y_rotation, delta) -> void:
 	if translation.y < -100:
 		kill()
 	var move_direction := Vector3.ZERO
-	move_direction.x = Input.get_action_raw_strength("right") - Input.get_action_raw_strength("left")
-	move_direction.z = Input.get_action_raw_strength("backward") - Input.get_action_raw_strength("forward")
+	move_direction.x = strengthX
+	move_direction.z = strengthZ
 	if animstop:
 		pass
 #	elif _velocity.y > 0:
@@ -221,16 +229,16 @@ func _physics_process(delta: float) -> void:
 		animate("walk",1)
 	else:
 		animate("idle",1)
-	move_direction = move_direction.rotated(Vector3.UP, _spring_arm.rotation.y).normalized()
+	move_direction = move_direction.rotated(Vector3.UP, _spring_arm_y_rotation).normalized()
 	
 	
 	_velocity.x = move_direction.x * speed
 	_velocity.z = move_direction.z * speed
 	_velocity.y -= gravity * delta
 	
-	if Input.is_action_just_pressed("jump"):
+	if jumpPressed:
 		jumping = true
-	elif Input.is_action_just_released("jump"):
+	elif jumpReleased:
 		jumping = false
 	
 	var just_landed := is_on_floor() and _snap_vector == Vector3.ZERO
@@ -245,14 +253,10 @@ func _physics_process(delta: float) -> void:
 		#var look_direction = Vector2(_velocity.z, _velocity.x)
 		#rotation.y = look_direction.angle()
 	_velocity = move_and_slide_with_snap(_velocity, _snap_vector, Vector3.UP, true)
-	rotation_degrees.y = $SpringArm.rotation_degrees.y + 180
-	get_input()
+	rotation.y = _spring_arm_y_rotation + PI
+	#get_input()
 
 func _ready():
-	var config = ConfigFile.new() # goes in client controller
-	config.load(SAVE_PATH) # goes in client controller
-	name = config.get_value("User","name", "Player") # goes in client controller
-	nametag.text = name # goes in client controller
 	stats.merge(load("res://Scenes/Stats.tscn").instance().stats, false)
 	$CanvasLayer/UI/Tab.rect_size = OS.window_size
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear2db(0.25))
