@@ -55,6 +55,8 @@ var animstop = false
 var animalternate = false
 var canclick = true
 
+var onfire = false
+
 var firesword = false
 var speedsword = false
 var jumpsword = false
@@ -336,6 +338,17 @@ func _on_Hit_area_entered(area):
 					onfireclone.player = self
 					area.add_child(onfireclone)
 					area.onfire = true
+			else:
+				area.take_damage(1,self)
+	if area.is_in_group("hitbox"):
+		if area.get_parent().health > 0:
+			if equippeditem == "Sword":
+				area.get_parent().damage(1+upgrades.value["Damage Multi"],self)
+				if firesword and !area.get_parent().onfire:
+					var onfireclone = load("res://Scenes/OnFire.tscn").instance()
+					onfireclone.player = self
+					area.get_parent().add_child(onfireclone)
+					area.get_parent().onfire = true
 			else:
 				area.take_damage(1,self)
 	elif area.is_in_group("hurtbox_structure") and equippeditem == "Sword":
