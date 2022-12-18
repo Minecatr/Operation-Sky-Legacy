@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Operation: Sky"
+config/name="Operation: Sky Multiplayer almost working"
 run/main_scene="res://Scenes/Title.tscn"
 boot_splash/image="res://Assets/Old/rebuild.png"
 config/icon="res://icon.png"

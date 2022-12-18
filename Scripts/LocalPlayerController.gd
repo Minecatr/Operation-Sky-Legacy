@@ -33,6 +33,7 @@ func _process(_delta):
 	for n in range(1,9): # Hotbar
 		if Input.is_action_just_pressed(str(n)):
 			player.use_input(str(n), true)
+			rpc("player_switch_item", player.network_id, str(n))
 	if Input.is_action_pressed("kill"):
 		player.use_input("kill", false)
 	if Input.is_action_pressed("cheat"):
