@@ -18,7 +18,7 @@ func _unhandled_input(_event):
 		net_root.rpc("player_swing", player.network_id)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	get_parent().get_node("CanvasLayer").visible = true
 
 func _process(_delta):
 	_spring_arm.translation = get_parent().translation + Vector3(0,1,0) # first person and camera
