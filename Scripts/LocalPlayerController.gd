@@ -20,7 +20,7 @@ func _unhandled_input(_event):
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	_spring_arm.translation = get_parent().translation + Vector3(0,1,0) # first person and camera
 	if _spring_arm.spring_length == 0:
 		_model.visible = false

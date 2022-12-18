@@ -99,6 +99,7 @@ func is_moving():
 		return true 
 	else:
 		return false 
+# warning-ignore:unreachable_code
 	previous_position = global_translation
 
 func do_action(type):

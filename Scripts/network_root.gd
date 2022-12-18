@@ -14,10 +14,15 @@ func _ready():
 	config.load(config_path)
 	my_info = { name = config.get_value("User", "name", "Player" + str(rand_range(0, 100))), id=get_tree().get_network_unique_id(), player_instance = get_parent().get_node("Player")}
 	my_info.player_instance.get_node("Nametag").text = my_info.name
+# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_connected", self, "_player_connected")
+# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+# warning-ignore:return_value_discarded
 	get_tree().connect("connected_to_server", self, "_connected_ok")
+# warning-ignore:return_value_discarded
 	get_tree().connect("connection_failed", self, "_connected_fail")
+# warning-ignore:return_value_discarded
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 	print("Loaded network_root Scene, doing all shit")
 	pass # Replace with function body.
